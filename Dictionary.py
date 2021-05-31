@@ -17,7 +17,7 @@ D = {'Amit':9513551663, 'Utkarsh':1234689845}
 print(D)
 
 # We need to make keys which are of Immutable data type.
-# Immutable Types: [String, Tuples, Sets, Number, frozenset]
+# Immutable Types: [String, Tuples, Number, frozenset]
 # If we give any mutable data type to place where Immutable data type was to be given we
 # get an Error:'Un hashable' Datatype
 
