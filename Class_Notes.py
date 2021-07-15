@@ -138,10 +138,6 @@ ord('c') # returns ASCII value of the given character.
 chr(99)  # returns character of given ASCII value.
 
 """
-I also need to know various other function in basic python such as zip etc.
-"""
-
-"""
 1. Data Types
 
 Python has several data types.
@@ -331,7 +327,7 @@ dct.get(3, 6)
 100
 
 # prints 100 as key associated with 100 is '3'.
-#       if not found the key in 1st argument it returns the second argument, as it is the default data.
+# if not found the key in 1st argument it returns the second argument, as it is the default data.
 
 """
 	9. dict.items(): returns the list of items in form of tuple.
@@ -585,7 +581,7 @@ def student_info(name, section, roll_number, subject):
 	return info
 k = student_info('aryan','D',5,'Python') # here info is given in the form of positional argvs.
 print(k)
-V = student_info( roll_number=34,  section='E', subject='Python Programming', name='ravi')  # function
+V = student_info(roll_number=34, section='E', subject='Python Programming', name='ravi')  # function
 
 # calling using keyword argvs.
 """
@@ -598,7 +594,7 @@ V = student_info( roll_number=34,  section='E', subject='Python Programming', na
 
 """
 
-def student_info( **dct):
+def student_info(**dct):
 	info = f'''
 		Name : {dct.get('name')}
 		Section : {dct.get('section')}
@@ -606,7 +602,7 @@ def student_info( **dct):
 		subject : {dct.get('subject')}
 	'''
 	return info
-V = student_info( subject='Python')  # function calling
+V = student_info(subject='Python')  # function calling
 print(V)
 # If nothing is passed then the default value is None.
 
@@ -710,6 +706,12 @@ fun(1)
 		This is a function without a function name.
 		This type of function is defined using the keyword lambda, hence it is also called lambda function.
 		Can have any number of arguments but only one expression.
+		The Lambda function is primarily used because lambda function is faster than named function as the 
+		virtual machine do not has to transfer the control, only substitution takes place which makes it faster.
+		
+		Benefit of named function over unnamed function is that we can call the function any time without rewriting
+		the code and the function can be complex as well, but the benefit of unnamed function is that it works faster
+		than the named function.
 
 		syntax
 			var_name = lambda arg1, arg2: expression(return statement)
@@ -735,7 +737,7 @@ print(nls) # [8, 18, 96, 43, 21]
 """
 
 lst = ['ravi','aman','chaman','chayanika','aniket','ankit']
-lst.sort(key = lambda x: sum([ord(z) for z in x]) )
+lst.sort(key=lambda x: sum([ord(z) for z in x]))
 lst # ['aman', 'ravi', 'ankit', 'chaman', 'aniket', 'chayanika']
 
 """
@@ -748,6 +750,25 @@ lst = [10, 20, 98, 45, 23]
 # Filter items less than 30
 nls = list(filter(lambda x: x<30,lst)) # Reduces the length of list.
 print(nls) # [10, 20, 23]
+
+"""
+		4. functools.reduce() : It takes multiple elements at the same time and performs an operation on them, append
+			the result value, in the list, goes on till we have one element in the list.
+			Returns a single value.
+			
+			Syntax:
+				functools.reduce( lambda more than one variable : operation on all the variables , iterator )
+"""
+
+import functools
+L = functools.reduce(lambda x,y: x+y,[1,2,3,4,5])
+print(L)  # 15
+# [1+2,3,4,5]
+# [3+3,4,5]
+# [6+4,5]
+# [10+5]
+# 15
+# hence we get the result.
 
 """    
 	Q: Write a Python program to detect the number of local variables declared in a function?
@@ -821,7 +842,8 @@ File Handling:
 
 # Ex: Simple File formation.
 f = open('E:\\FileHandling\\addition.txt','w') # creates a file in the given directory and give all permission to f.
-num1 = 10; num2 = 20
+num1 = 10
+num2 = 20
 f.write(f'The addition of {num1} and {num2} is {num1+num2}.') # writes in the file.
 f.close() # closes the file.
 
@@ -843,7 +865,7 @@ f.close() # closes the file.
 		>>>     f.write('\\n')
 		>>> f.close()
 """
-	# Ex: Open file in read mode.
+# Ex: Open file in read mode.
 f = open('E:\\FileHandling\\table.txt','r')
 data = f.read() # reads entire data of the file in form of a string.
 print(data)
@@ -888,14 +910,14 @@ L2 = f.readline() # reads from the last cursor location to the next '\\n.
 print(L2)
 f.close()
 
-	# > readlines(): Read the entire lines in the text in form of list of lines.
+# > readlines(): Read the entire lines in the text in form of list of lines.
 
 f = open('E:\\FileHandling\\table.txt','r')
 Data = f.readlines()
 print(Data) # Data is in the form of list.
 f.close()
 
-	# f.readlines(argv): The argument in here represents the number of lines to be read.
+# f.readlines(argv): The argument in here represents the number of lines to be read.
 
 f = open('E:\\FileHandling\\table.txt','r')
 Data = f.readlines()
@@ -1012,7 +1034,7 @@ f.close()
 			f.seek(offset, origin) # used to take cursor at a particular point.
 				offset -> any integer
 				origin:
-					0: beginning # when seeking from the beginning, we do not use negative offset.
+					0: beginning # when seeking from the beginning, we do not use negative offset. [Default]
 					1: current
 					2: last
 			By default when we open a file, the position of cursor is 0.
@@ -1042,11 +1064,11 @@ Editing Files in Hybrid Mode:
 
 f = open('E://FileHandling//texts.txt','w+')  # Even if the file was existing, it'll delete it and create a new one.
 f.write('Hello, How are you?')  # Writing the line.
-f.seek(0, 0)  # Seeking at the beginning of file.
+f.seek(0)  # Seeking at the beginning of file.
 data = f.read()
 print(data)
 f.write('\nNow Adding more data to it.')  # Now adding one more line.
-f.seek(0, 0)  # Seeking again at the beginning of file.
+f.seek(0)  # Seeking again at the beginning of file. # De
 data = f.read()
 print(data) # This will print both of the lines.
 f.close()
@@ -1062,16 +1084,15 @@ f.close()
 f = open('E://FileHandling//texts.txt','r+')  # Even if the file was existing, it'll delete it and create a new one.
 # By default it'll add data in the starting.
 f.write('Some Extra data')  # Writing the line.
-f.seek(0, 0)  # Seeking at the beginning of file.
+f.seek(0)  # Seeking at the beginning of file.
 data = f.read()
 print(data)
 f.close()
 
-
 # Program to read a number of lines entered by the user.
 f = open('E://FileHandling//table.txt','r')
 for i in range(int(input('Enter no. of lines: '))): print(next(f))
+
 "Try Writing the python solutions in minimal way possible."
 "That shows how efficient as a coder you are, it will also increase your syntactical knowledge."
-
 
