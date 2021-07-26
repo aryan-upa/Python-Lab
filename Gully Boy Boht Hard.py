@@ -1,0 +1,5 @@
+st = input()
+I = int(input())
+N = int(input())
+st = (st[I:] + st[:I]).replace(" ",'')
+print(*list(st)*N)
